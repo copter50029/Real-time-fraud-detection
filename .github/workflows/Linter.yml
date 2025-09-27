@@ -8,6 +8,9 @@ jobs:
   super-lint:
     name: Lint Code Base
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
