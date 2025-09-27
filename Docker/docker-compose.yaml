@@ -290,7 +290,7 @@ services:
     container_name: datawarehouse
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: licence-plate
+      MYSQL_DATABASE: Data-Warehouse
     ports:
       - "3307:3306"
     volumes:
