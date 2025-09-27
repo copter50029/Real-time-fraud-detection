@@ -1,14 +1,13 @@
-CREATE USER IF NOT EXISTS 'copter50029'@'%' IDENTIFIED BY 'copter12345';
-GRANT ALL PRIVILEGES ON *.* TO 'copter50029'@'%';
+CREATE USER IF NOT EXISTS user@'%' IDENTIFIED BY 'user';
+GRANT ALL PRIVILEGES ON *.* TO user@'%';
 FLUSH PRIVILEGES;
--- login to mysql with the following command
--- docker exec -it license-plate-mysql mysql -u copter50029 -p'copter12345' licence-plate
-USE `Data-Warehouse`;
 
-CREATE TABLE IF NOT EXISTS `Data-Warehouse` (
-  `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `plate_id` VARCHAR(15) NOT NULL,
-  `timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  `image_url` TEXT NOT NULL,
-  `camera_id` VARCHAR(10) NOT NULL
+USE `DataWarehouse`;
+
+CREATE TABLE IF NOT EXISTS `DataWarehouse` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `plate_id` VARCHAR(15) NOT NULL,
+    `timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `image_url` TEXT NOT NULL,
+    `camera_id` VARCHAR(10) NOT NULL
 );
