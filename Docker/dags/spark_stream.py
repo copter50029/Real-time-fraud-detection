@@ -84,5 +84,5 @@ with DAG(
         python_callable=load_data,
         op_kwargs={"data": transform_task.output},
     )
-    
+
 extract_task >> transform_task >> load_task  # pylint: disable=pointless-statement
