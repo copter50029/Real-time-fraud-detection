@@ -7,10 +7,10 @@ import time
 
 import pandas as pd
 import pendulum
-from kafka import KafkaProducer
 
 from airflow.operators.python import PythonOperator
 from airflow.sdk import DAG
+from kafka import KafkaProducer
 
 DATA_PATH = "/opt/airflow/data/Raw-data.csv"
 
@@ -84,5 +84,6 @@ with DAG(
         python_callable=load_data,
         op_kwargs={"data": transform_task.output},
     )
-
+    
+    # pylint: disable=pointless-statement
     extract_task >> transform_task >> load_task
