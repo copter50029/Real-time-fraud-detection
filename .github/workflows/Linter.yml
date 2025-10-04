@@ -22,9 +22,6 @@ jobs:
       - name: Run Super Linter
         uses: super-linter/super-linter@v6
         env:
-          VALIDATE_PYTHON_BLACK: true
-          VALIDATE_PYTHON_FLAKE8: true
-          VALIDATE_PYTHON_PYLINT: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SQLFLUFF_DIALECT: mysql
           
