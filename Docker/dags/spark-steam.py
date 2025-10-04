@@ -1,20 +1,28 @@
-from datetime import datetime
+"""
+DAG for real-time fraud detection using Airflow streaming and Kafka.
+"""
+
 import json
-import requests
-from kafka import KafkaProducer
 import time
-import pendulum
-from airflow.sdk import DAG
+
 import pandas as pd
+import pendulum
+from kafka import KafkaProducer
+
 from airflow.operators.python import PythonOperator
-data_path = "/opt/airflow/data/Raw-data.csv"
+from airflow.sdk import DAG
+
+DATA_PATH = "/opt/airflow/data/Raw-data.csv"
+
 
 def extract_data(data_path):
+    """Extracts data from CSV file."""
     data = pd.read_csv(data_path)
     return data
 
+
 def transform_data(data):
-    # Transform each row into a dictionary
+    """Transforms raw data into a list of dictionaries."""
     transformed = []
     for _, row in data.iterrows():
         item = {
@@ -44,14 +52,15 @@ def transform_data(data):
         transformed.append(item)
     return transformed
 
-    
+
 def load_data(data):
+    """Sends transformed data to Kafka topic."""
     producer = KafkaProducer(bootstrap_servers=['broker1:29092'], max_block_ms=5000)
     for record in data:
         producer.send('transactions', json.dumps(record).encode('utf-8'))
         time.sleep(1)  # Simulate real-time by adding a delay
-    
-    
+
+
 with DAG(
     dag_id="spark_steam",
     schedule="@daily",
@@ -61,7 +70,7 @@ with DAG(
     extract_task = PythonOperator(
         task_id="extract_data",
         python_callable=extract_data,
-        op_kwargs={"data_path": data_path},
+        op_kwargs={"data_path": DATA_PATH},
     )
 
     transform_task = PythonOperator(
