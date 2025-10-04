@@ -1,3 +1,6 @@
 kafka-python
 requests
 datetime
+pandas
+pendulum
+apache-airflow

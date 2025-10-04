@@ -210,3 +210,4 @@ Docker/config
 Docker/logs
 Docker/plugins
 Docker/script/init.sql
+Data/
